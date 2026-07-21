@@ -2,7 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import prisma from "@/lib/prisma";
-import { PostStatus } from "@prisma/client";
+import { PostStatus } from "@/generated/prisma/client";
 
 export async function createPost(data: any) {
   try {
