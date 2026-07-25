@@ -11,7 +11,12 @@ export default async function AnalyticsPage() {
 
   const admins = Array.from(new Set(publishedPosts.map(p => p.admin?.codename).filter(Boolean))) as string[];
   const types = ['POST', 'CAROUSEL', 'REELS'];
-  const months = Array.from(new Set(publishedPosts.map(p => p.postedMonth).filter(Boolean))) as string[];
+  const getIndonesianMonth = (date: Date) => {
+    const monthNames = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+    return monthNames[date.getMonth()];
+  };
+
+  const months = Array.from(new Set(publishedPosts.map(p => p.postedAt ? getIndonesianMonth(p.postedAt) : null).filter(Boolean))) as string[];
   
   // Modul 1: Count of Codename (Bulan vs Admin)
   const countByMonthAndAdmin: Record<string, Record<string, number>> = {};
@@ -34,7 +39,7 @@ export default async function AnalyticsPage() {
   publishedPosts.forEach(post => {
     const admin = post.admin?.codename;
     const type = post.type;
-    const month = post.postedMonth;
+    const month = post.postedAt ? getIndonesianMonth(post.postedAt) : null;
 
     if (type && countByType[type] !== undefined) {
       countByType[type]++;

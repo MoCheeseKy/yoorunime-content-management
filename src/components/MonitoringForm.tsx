@@ -28,7 +28,7 @@ export function MonitoringForm({ initialData = {}, availablePosts = [], isCreate
       likesRange: initialData?.likesRange || '',
       repostCount: initialData?.repostCount || 0,
       shareCount: initialData?.shareCount || 0,
-      postedMonth: initialData?.postedMonth || ''
+      postedAt: initialData?.postedAt ? new Date(initialData.postedAt).toISOString().split('T')[0] : ''
     } 
   });
 
@@ -91,29 +91,12 @@ export function MonitoringForm({ initialData = {}, availablePosts = [], isCreate
 
         <div className='grid grid-cols-1 md:grid-cols-2 gap-5'>
           <div className='space-y-2'>
-            <Label className='text-zinc-300'>Bulan Posting</Label>
-            <Select
-              defaultValue={form.getValues('postedMonth')}
-              onValueChange={(val) => form.setValue('postedMonth', val)}
-            >
-              <SelectTrigger className="bg-zinc-950 border-zinc-800">
-                <SelectValue placeholder='Pilih Bulan' />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value='Januari'>Januari</SelectItem>
-                <SelectItem value='Februari'>Februari</SelectItem>
-                <SelectItem value='Maret'>Maret</SelectItem>
-                <SelectItem value='April'>April</SelectItem>
-                <SelectItem value='Mei'>Mei</SelectItem>
-                <SelectItem value='Juni'>Juni</SelectItem>
-                <SelectItem value='Juli'>Juli</SelectItem>
-                <SelectItem value='Agustus'>Agustus</SelectItem>
-                <SelectItem value='September'>September</SelectItem>
-                <SelectItem value='Oktober'>Oktober</SelectItem>
-                <SelectItem value='November'>November</SelectItem>
-                <SelectItem value='Desember'>Desember</SelectItem>
-              </SelectContent>
-            </Select>
+            <Label className='text-zinc-300'>Tanggal Posting</Label>
+            <Input
+              type="date"
+              className='bg-zinc-950 border-zinc-800 focus-visible:ring-blue-500/50 text-white placeholder:text-zinc-600 transition-all rounded-lg'
+              {...form.register('postedAt')}
+            />
           </div>
 
           <div className='space-y-2'>
