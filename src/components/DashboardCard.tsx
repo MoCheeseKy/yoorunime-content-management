@@ -15,15 +15,15 @@ export function DashboardCard({ post }: { post: any }) {
 
   const daysUntilPost = post.scheduledAt ? differenceInDays(new Date(post.scheduledAt), new Date()) : null;
   
-  let alertStyle = "border-white/5 hover:border-white/10";
+  let alertStyle = "border-zinc-800/60 hover:border-zinc-700";
   let alertBadge = null;
   
   if (daysUntilPost !== null) {
     if (daysUntilPost < 0 && post.status !== "PUBLISHED") {
-      alertStyle = "border-red-500/50 shadow-[0_0_20px_rgba(239,68,68,0.1)] hover:border-red-500/80";
+      alertStyle = "border-red-900/50 hover:border-red-800/80 bg-red-950/10";
       alertBadge = <Badge variant="destructive" className="ml-2 bg-red-500/20 text-red-400 border-none">Overdue!</Badge>;
     } else if (daysUntilPost <= 2 && post.status !== "PUBLISHED") {
-      alertStyle = "border-amber-400/50 shadow-[0_0_20px_rgba(251,191,36,0.1)] hover:border-amber-400/80";
+      alertStyle = "border-amber-900/50 hover:border-amber-800/80 bg-amber-950/10";
       alertBadge = <Badge variant="secondary" className="bg-amber-500/20 text-amber-400 hover:bg-amber-500/30 ml-2 border-none">Due in {daysUntilPost}d</Badge>;
     } else if (post.status === "PUBLISHED") {
       alertBadge = <Badge variant="default" className="ml-2 bg-green-500/20 text-green-400 border-none">Published</Badge>;
@@ -42,7 +42,7 @@ export function DashboardCard({ post }: { post: any }) {
 
   return (
     <Link href={`/posts/${post.id}`}>
-      <Card className={`group glass-card transition-all duration-300 hover:-translate-y-1 hover:shadow-xl relative h-full flex flex-col cursor-pointer ${alertStyle}`}>
+      <Card className={`group bg-zinc-900/50 border transition-all duration-200 hover:bg-zinc-800/50 relative h-full flex flex-col cursor-pointer rounded-xl ${alertStyle}`}>
       <CardHeader className="pb-2">
         <div className="flex justify-between items-start gap-4">
           <CardTitle className="text-lg leading-tight group-hover:text-blue-400 transition-colors">{post.title}</CardTitle>
@@ -65,14 +65,14 @@ export function DashboardCard({ post }: { post: any }) {
           <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
             <button 
               onClick={(e) => { e.preventDefault(); router.push(`/posts/${post.id}`); }}
-              className="p-2 bg-white/5 hover:bg-blue-500/20 text-zinc-400 hover:text-blue-400 rounded-full transition-colors"
+              className="p-2 bg-zinc-800 hover:bg-zinc-700 text-zinc-400 hover:text-zinc-200 rounded-md transition-colors"
               disabled={isPending}
             >
               <Pencil className="w-4 h-4" />
             </button>
             <button 
               onClick={handleDelete}
-              className="p-2 bg-white/5 hover:bg-red-500/20 text-zinc-400 hover:text-red-400 rounded-full transition-colors"
+              className="p-2 bg-zinc-800 hover:bg-red-950 text-zinc-400 hover:text-red-400 rounded-md transition-colors"
               disabled={isPending}
             >
               {isPending ? <Loader2 className="w-4 h-4 animate-spin" /> : <Trash2 className="w-4 h-4" />}

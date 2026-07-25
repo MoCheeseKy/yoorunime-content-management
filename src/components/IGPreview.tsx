@@ -44,9 +44,7 @@ export function IGPreview({
         </Button>
       </div>
 
-      <div className='glass-card border-white/10 rounded-2xl overflow-hidden flex flex-col md:flex-row max-w-4xl mx-auto shadow-2xl relative w-full'>
-        {/* Decorative Glow inside preview */}
-        <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-blue-500/20 blur-[100px] rounded-full pointer-events-none z-0' />
+      <div className='bg-zinc-900/50 border border-zinc-800/60 rounded-2xl overflow-hidden flex flex-col md:flex-row max-w-4xl mx-auto relative w-full'>
 
         {/* Left: Media Area */}
         <div
@@ -91,7 +89,7 @@ export function IGPreview({
 
         {/* Right: Info & Caption Area */}
         <div className='w-full md:w-[40%] relative min-h-[400px] md:min-h-0'>
-          <div className='absolute inset-0 flex flex-col bg-zinc-950/50 backdrop-blur-xl z-10'>
+          <div className='absolute inset-0 flex flex-col bg-zinc-950/80 z-10'>
             {/* Header */}
             <div className='flex items-center p-4 border-b border-white/5'>
               <div className='w-8 h-8 rounded-full bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-500 p-[2px] mr-3 shrink-0'>
